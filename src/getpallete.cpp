@@ -1,4 +1,4 @@
-#include "algorytmy.h"
+#include "include/algorytmy.h"
 
 Pallete getPallete(Bitmap & in)
 {
