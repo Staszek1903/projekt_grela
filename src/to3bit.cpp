@@ -130,7 +130,7 @@ int* to3bitTab(Bitmap &in, Pallete paleta)
     for(int i = 0; i < resX; ++i)
         for(int j = 0; j < resY; ++j)
         {
-            tab[indeks++] = FindIndex(in.getPixel(i,j), paleta);
+            tab[indeks++] = FindIndex(in.getPixel(j,i), paleta);
         }
     return tab;
 }

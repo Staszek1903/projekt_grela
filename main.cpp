@@ -1,7 +1,5 @@
 ﻿#include <cstdlib>
 #include <SDL.h>
-#include <vector>
-#include <algorithm>
 
 using namespace std;
 
@@ -14,8 +12,6 @@ using namespace std;
 #include "algorytmy.h"
 
 using namespace std;
-
-
 
 int main ( int argc, char** argv )
 {
