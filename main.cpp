@@ -1,7 +1,6 @@
 ﻿#include <cstdlib>
-#include <SDL/SDL.h>
-#include <vector>
 #include <algorithm>
+#include <SDL/SDL.h>
 
 using namespace std;
 
@@ -17,7 +16,7 @@ using namespace std;
 
 int main ( int argc, char** argv )
 {
-    Screen screen(800,600,"projekt_grela");
+    Screen screen(800,700,"projekt_grela");
 
     // program main loop
     bool done = false;

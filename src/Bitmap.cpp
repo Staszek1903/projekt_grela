@@ -118,3 +118,4 @@ void Bitmap::create(int x,int y)
         printf("Unable to create bitmap: %s\n", SDL_GetError());
     }
 }
+

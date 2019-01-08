@@ -116,11 +116,12 @@ Pallete getPallete(Bitmap & in)
 
 void test3(Screen & screen)
 {
+    printf("testuje 3\n");
     Bitmap bmp("obrazek4.bmp");
     Pallete paleta = getPallete(bmp);
     for(int k = 0; k < 8; ++k)
         for(int i = 0; i < 20; ++i)
             for(int j = 0; j < 20; ++j)
-                bmp.setPixel(i,j,paleta.c[k]);
+                bmp.setPixel(i + 20*k,j,paleta.c[k]);
     screen.draw(bmp, 0, 0);
 }

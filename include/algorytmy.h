@@ -42,5 +42,6 @@ void test2(Screen & screen);
 Pallete getPallete(Bitmap & in);
 void test3(Screen & screen);
 
-void to3bit(Bitmap &in, Bitmap &out);
+void to3bitBMP(Bitmap &in, Bitmap &out, Pallete paleta);
+int* to3bitTab(Bitmap &in, Pallete paleta);
 void test4(Screen & screen);
