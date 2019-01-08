@@ -1,7 +1,13 @@
 
-#include "include/algorytmy.h"
+#ifdef __linux__
+    #include "include/algorytmy.h"
+#else
+    #include "algorytmy.h"
+#endif
+
 #include <vector>
 #include <algorithm>
+
 using namespace std;
 
 bool sortCompRed(SDL_Color i, SDL_Color j)

@@ -1,6 +1,17 @@
 ﻿#include <cstdlib>
 #include <algorithm>
-#include <SDL/SDL.h>
+
+#ifdef __linux__
+    #include <SDL/SDL.h>
+    #include "include/Bitmap.h"
+    #include "include/Screen.h"
+    #include "include/algorytmy.h"
+#else
+    #include <SDL.h>
+    #include "Bitmap.h"
+    #include "Screen.h"
+    #include "algorytmy.h"
+#endif
 
 using namespace std;
 
@@ -8,9 +19,6 @@ using namespace std;
 //TODO class BUTTON
 //TODO copy constructors;
 
-#include "include/Bitmap.h"
-#include "include/Screen.h"
-#include "include/algorytmy.h"
 
 using namespace std;
 

@@ -1,4 +1,8 @@
-#include "include/Screen.h"
+#ifdef __linux__
+    #include "include/Screen.h"
+#else
+    #include "Screen.h"
+#endif
 
 Screen::Screen(int width, int height, std::string name)
 {
