@@ -1,3 +1,8 @@
+#ifdef __linux__
+    #include <SDL/SDL.h>
+#else
+    #include <SDL.h>
+#endif
 
 #include "Screen.h"
 #include <vector>

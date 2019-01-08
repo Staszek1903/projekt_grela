@@ -1,4 +1,8 @@
-#include "include/algorytmy.h"
+#ifdef __linux__
+    #include "include/algorytmy.h"
+#else
+    #include "algorytmy.h"
+#endif
 
 std::string dec_to_bin(Uint8 bits)
 {
