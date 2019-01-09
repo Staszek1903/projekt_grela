@@ -64,14 +64,23 @@ void compression(CompressedData &out, Bit3BMP &in );
 void dekompression (Bit3BMP & out, CompressedData & in);
 void test1(Screen & screen);
 
-void dittering(Bitmap & in, Bitmap & out, Pallete paleta);
+void dittering(Bitmap & in, Pallete paleta);
 void test2(Screen & screen);
+
+bool sortCompRed(SDL_Color i, SDL_Color j);
+bool sortCompGreen(SDL_Color i, SDL_Color j);
+bool sortCompBlue(SDL_Color i, SDL_Color j);
+int vectorIncludes(vector<SDL_Color> tab, SDL_Color col);
+SDL_Color averageColor(vector<SDL_Color> tab, int min, int max);
 
 Pallete getPallete(Bitmap & in);
 void test3(Screen & screen);
 
+SDL_Color FindColor(SDL_Color pixel, Pallete paleta);
+int FindIndex(SDL_Color pixel, Pallete paleta);
 void to3bitBMP(Bitmap &in, Bitmap &out, Pallete paleta);
 Bit3BMP to3bitTab(Bitmap &in, Pallete paleta);
+
 void test4(Screen & screen);
 
 void seeExceptions(EXCEPTION_CODE error);
