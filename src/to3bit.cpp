@@ -137,10 +137,10 @@ int* to3bitTab(Bitmap &in, Pallete paleta)
 
 void test4(Screen & screen)
 {
-    Bitmap bmp("obrazek2.bmp");
-    Bitmap bmp1("obrazek2.bmp");
-    Bitmap bmp2("obrazek2.bmp");
-    Bitmap bmp3("obrazek2.bmp");
+    Bitmap bmp("obrazek4.bmp");
+    Bitmap bmp1("obrazek4.bmp");
+    Bitmap bmp2("obrazek4.bmp");
+    Bitmap bmp3("obrazek4.bmp");
     screen.draw(bmp,0,0);
     Pallete paleta;
 

@@ -15,7 +15,7 @@ using namespace std;
 
 int main ( int argc, char** argv )
 {
-    Screen screen(800,700,"projekt_grela");
+    Screen screen(900,600,"projekt_grela");
 
     // program main loop
     bool done = false;
