@@ -126,18 +126,20 @@ void to3bitBMP(Bitmap &in, Bitmap &out, Pallete paleta)
         }
 }
 
-int* to3bitTab(Bitmap &in, Pallete paleta)
+Bit3BMP to3bitTab(Bitmap &in, Pallete paleta)
 {
+    Bit3BMP ret;
     int resX = in.getWidth();
     int resY = in.getHeight();
-    int* tab = new int[resX * resY];
+    ret.data.resize(resX * resY);
+
     int indeks = 0;
     for(int i = 0; i < resX; ++i)
         for(int j = 0; j < resY; ++j)
         {
-            tab[indeks++] = FindIndex(in.getPixel(j,i), paleta);
+            ret.data[indeks++] = FindIndex(in.getPixel(j,i), paleta);
         }
-    return tab;
+    return ret;
 }
 
 void test4(Screen & screen)
