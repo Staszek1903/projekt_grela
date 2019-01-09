@@ -32,6 +32,26 @@ Uint8 * CompressedData::getDataPointer()
     return &(data.at(0));
 }
 
+std::vector<Uint8>& CompressedData::getDataRef()
+{
+    return data;
+}
+
+int CompressedData::getDataSize()
+{
+    return data.size();
+}
+
+unsigned long CompressedData::getBitSize()
+{
+    return bitSize;
+}
+
+void CompressedData::setBitSize(unsigned long bitSize)
+{
+    this->bitSize = bitSize;
+}
+
 void CompressedData::writeBit(Uint8 bit)
 {
     int byte_index = bitSize/8;
@@ -110,130 +130,70 @@ Uint8 CompressedData::decodeByte(int k)
     }
     rest>>=1;
 
-    int decoded = quotient*k +rest;
+    //printf("q: %i, r: %i;\n", quotient, rest);
+
+    int decoded = quotient*(1<<k) +rest;
     return decoded;
 }
 
-struct RiceHistory
+void CompressedData::dataResize(int size)
 {
-    static constexpr int LENGHT = 16;
-    int data[LENGHT];
-
-    int getK()
-    {
-        int sum =0;
-        for(int i=0; i<LENGHT; ++i)
-            sum += data[i];
-        sum = (sum+(LENGHT/2))/LENGHT;
-        return sum;
-    }
-
-    void clear()
-    {
-        for(int i=0; i<LENGHT; ++i)
-            data[i] = 0;
-    }
-
-    void update(int index, int val)
-    {
-        data[index%LENGHT] = val;
-    }
-};
+    data.resize(size);
+}
 
 void compression( CompressedData& out, Bit3BMP& obraz)
-{
-    CompressedData ret;
-    RiceHistory history;
-    int k;
+{   
+    int byteSize = obraz.data.size();
+    out.dataResize(4);
 
-    for(int i=0; i<RiceHistory::LENGHT && i<obraz.data.size(); ++i)
-        history.update(i,notRedundantBits(obraz.data.at(i)));
+    out.getDataRef().at(0) = byteSize;
+    out.getDataRef().at(1) = byteSize>>8;
+    out.getDataRef().at(2) = byteSize>>16;
+    out.getDataRef().at(3) = byteSize>>24;
 
-    k = history.getK();
-    if(k==0) k=1;
+    out.setBitSize(32);
 
-    history.clear();
-
-    out.data.at(0) = k;
-    out.bitSize = 8;
-
-    for(int i=0; i<obraz.data.size(); ++i)
+    for(Uint8 byte: obraz.data)
     {
-        if(i>=RiceHistory::LENGHT)
-            k = history.getK();
-
-        out.encodeByte(obraz.data.at(i),k);
-        history.update(i,notRedundantBits(obraz.data.at(i)));
-        printf("K[%i]: %i\n", i,k);
+        out.encodeByte(byte,1);
     }
 }
 
 void dekompression (Bit3BMP & out, CompressedData & in)
 {
-    int k = in.data.at(0);
-    in.bitSize = 8;
-    RiceHistory history;
+    out.data.clear();
 
-    int i=0;
-    while(in.bitSize/8 < in.data.size())
-    {
-        if(i >= RiceHistory::LENGHT)
-            k=history.getK();
+    int byteSize = in.getDataRef().at(3);
+    byteSize = (byteSize<<8) | in.getDataRef().at(2);
+    byteSize = (byteSize<<8) | in.getDataRef().at(1);
+    byteSize = (byteSize<<8) | in.getDataRef().at(0);
 
-        Uint8 x = in.decodeByte(k);
-        out.data.push_back(x);
-        history.update(i,notRedundantBits(x));
+    in.setBitSize(32);
 
-        printf("%c", (char)x);
-        //printf("K[%i]: %i\n", i,k);
-        ++i;
-    }
+    printf("bytesize:  %i\n", byteSize);
+
+    for(int i=0; i<byteSize; ++i)
+        out.data.push_back(in.decodeByte(1));
 }
 
 void test1(Screen & screen)
 {
-    CompressedData comp[8];
-    auto & data = comp[5];
-    Bitmap b("obrazek1.bmp");
-    screen.draw(b, 200,200);
-    screen.flip();
+    Bit3BMP in,out;
+    for(int i=0; i<200; ++i)
+        in.data.push_back(i%8);
 
-    std::string test = "Poprosze krótką wiązanke. Chuj ci w dupe cwelu. XDDDD Oto jest święty tekst do zakodowania nieomyslną metodą wielkiego Ryżu.";
-    Bit3BMP input;
-    Bit3BMP output;
-    for(int i=0; i<test.size(); ++i)
-        input.data.push_back(test[i]-97);
+    CompressedData intermidiate;
 
-    compression(data, input);
-    dekompression(output,data);
+    compression(intermidiate,in);
 
-    printf("copresed size: %i\n", data.data.size());
+    dekompression(out,intermidiate);
 
-    //    std::string output;
+    for(Uint8 byte: out.data)
+    {
+        printf("%i", byte);
+    }
 
-//    for(int i=0; i<test.size(); ++i)
-//    {
-//        for(int j=0; j<8; ++j)
-//            comp[j].encodeByte(test[i]-97,j);
-//    }
-
-//    printf("original data: %i\n", test.size());
-//    for(int j=0; j<8; ++j)
-//        printf("%i %i\n", j, comp[j].data.size());
-//    printf("\ntest1\n");
-//    data.printData();
-//    data.bitSize = 0;
-//    for(int i=0; i<test.size(); ++i)
-//    {
-//        Uint8 c = data.decodeByte(5);
-//        //printf("%i %i \n", i, c);
-
-//        output += (c==56)?' ':(char)(c+97);
-//    }
-
-//    printf("output: %s\n\n", output.c_str());
-
-    printf("\ntest1\n");
+    printf("\ntest1 size: %i \n", intermidiate.getDataSize());
 }
 
 

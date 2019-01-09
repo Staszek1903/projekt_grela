@@ -7,18 +7,25 @@
 #include "Screen.h"
 #include <vector>
 
-struct CompressedData
+class CompressedData
 {
 
     std::vector <Uint8> data;
     unsigned long bitSize;
 
+public:
     CompressedData() :data(1,0), bitSize(0){}
     CompressedData(CompressedData & other) : data(other.data), bitSize(other.bitSize){}
     CompressedData& operator= ( CompressedData& other) { data = other.data; bitSize = other.bitSize; return *this; }
     ~CompressedData(){}
 
     Uint8 * getDataPointer();
+    std::vector<Uint8>& getDataRef();
+    void dataResize(int size);
+    int getDataSize();
+    unsigned long getBitSize();
+    void setBitSize(unsigned long);
+
     void writeBit(Uint8 bit);
     Uint8 readBit();
     void printData();
