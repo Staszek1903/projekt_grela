@@ -398,7 +398,7 @@
 
 1546939276 D
 
-1547037221 source:c:\users\marek\desktop\git_projekty\projekt_grela\main.cpp
+1547041311 source:c:\users\marek\desktop\git_projekty\projekt_grela\main.cpp
 	<algorithm>
 	<SDL/SDL.h>
 	"include/Bitmap.h"
@@ -667,23 +667,27 @@
 1546939615 c:\users\marek\desktop\git_projekty\projekt_grela\include\screen.h
 	"Bitmap.h"
 
-1547037221 c:\users\marek\desktop\git_projekty\projekt_grela\include\algorytmy.h
+1547043087 c:\users\marek\desktop\git_projekty\projekt_grela\include\algorytmy.h
 	<SDL/SDL.h>
 	<SDL.h>
 	"Screen.h"
 	<vector>
+	<fstream>
+	<string>
+	<iostream>
 
 1547037221 source:c:\users\marek\desktop\git_projekty\projekt_grela\src\bitmap.cpp
 	"include/Bitmap.h"
 	"Bitmap.h"
 
-1547037589 source:c:\users\marek\desktop\git_projekty\projekt_grela\src\compression.cpp
+1547047539 source:c:\users\marek\desktop\git_projekty\projekt_grela\src\compression.cpp
 	"include/algorytmy.h"
 	"algorytmy.h"
 
-1547037221 source:c:\users\marek\desktop\git_projekty\projekt_grela\src\dittering.cpp
+1547041311 source:c:\users\marek\desktop\git_projekty\projekt_grela\src\dittering.cpp
 	"include/algorytmy.h"
 	"algorytmy.h"
+	<iostream>
 
 1547037221 source:c:\users\marek\desktop\git_projekty\projekt_grela\src\getpallete.cpp
 	"include/algorytmy.h"
@@ -904,4 +908,9 @@
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
+
+1547043981 source:c:\users\marek\desktop\git_projekty\projekt_grela\src\write&read_pic.cpp
+	"include/algorytmy.h"
+	"algorytmy.h"
+	<iostream>
 

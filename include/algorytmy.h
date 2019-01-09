@@ -6,7 +6,11 @@
 
 #include "Screen.h"
 #include <vector>
+#include <fstream>
+#include <string>
+#include <iostream>
 
+using namespace std;
 class CompressedData
 {
 
@@ -34,6 +38,14 @@ public:
 };
 
 
+enum EXCEPTION_CODE
+{
+	openError,
+	createError,
+	alloc_problem
+};
+
+
 struct Bit3BMP
 {
     std::vector <Uint8> data;
@@ -43,6 +55,10 @@ struct Pallete
 {
     SDL_Color c[8];
 };
+
+Pallete NarzuconaPaleta();
+
+Pallete SkalaSzarosci();
 
 void compression(CompressedData &out, Bit3BMP &in );
 void dekompression (Bit3BMP & out, CompressedData & in);
@@ -57,3 +73,10 @@ void test3(Screen & screen);
 void to3bitBMP(Bitmap &in, Bitmap &out, Pallete paleta);
 int* to3bitTab(Bitmap &in, Pallete paleta);
 void test4(Screen & screen);
+
+void seeExceptions(EXCEPTION_CODE error);
+
+void CreateFile(std::fstream &file);
+void OpenFile(std::fstream &file);
+
+void test5(Screen & screen);

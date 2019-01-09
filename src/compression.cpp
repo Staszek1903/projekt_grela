@@ -151,6 +151,7 @@ void compression( CompressedData& out, Bit3BMP& obraz)
     out.getDataRef().at(2) = byteSize>>16;
     out.getDataRef().at(3) = byteSize>>24;
 
+
     out.setBitSize(32);
 
     for(Uint8 byte: obraz.data)

@@ -52,6 +52,7 @@ int main ( int argc, char** argv )
                     if (event.key.keysym.sym == SDLK_2) test2(screen);
                     if (event.key.keysym.sym == SDLK_3) test3(screen);
                     if (event.key.keysym.sym == SDLK_4) test4(screen);
+                    if (event.key.keysym.sym == SDLK_5) test5(screen);
                     if (event.key.keysym.sym == SDLK_a)
                         {Bitmap bmp("obrazek1.bmp"); screen.draw(bmp,0,0);}
                     if (event.key.keysym.sym == SDLK_s)

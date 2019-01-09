@@ -55,6 +55,7 @@
 		<Unit filename="src/dittering.cpp" />
 		<Unit filename="src/getpallete.cpp" />
 		<Unit filename="src/to3bit.cpp" />
+		<Unit filename="src/write&amp;read_pic.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
