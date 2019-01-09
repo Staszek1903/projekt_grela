@@ -1,10 +1,14 @@
-#include "Screen.h"
+#ifdef __linux__
+    #include "include/Screen.h"
+#else
+    #include "Screen.h"
+#endif
 
 Screen::Screen(int width, int height, std::string name)
 {
     // console output
-    freopen( "CON", "wt", stdout );
-    freopen( "CON", "wt", stderr );
+    //freopen( "CON", "wt", stdout );
+    //freopen( "CON", "wt", stderr );
 
     // initialize SDL video
     if ( SDL_Init( SDL_INIT_VIDEO ) < 0 )

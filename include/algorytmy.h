@@ -1,14 +1,42 @@
+#ifdef __linux__
+    #include <SDL/SDL.h>
+#else
+    #include <SDL.h>
+#endif
 
 #include "Screen.h"
+#include <vector>
 
-struct CompressedData
+class CompressedData
 {
-    Uint8 * data;
-    int size;
 
-    CompressedData() :data(nullptr), size(0){}
-    CompressedData(CompressedData & other) : data(other.data), size(other.size) {other.data = nullptr; other.size = 0;}
-    ~CompressedData() { if(data) delete [] data; }
+    std::vector <Uint8> data;
+    unsigned long bitSize;
+
+public:
+    CompressedData() :data(1,0), bitSize(0){}
+    CompressedData(CompressedData & other) : data(other.data), bitSize(other.bitSize){}
+    CompressedData& operator= ( CompressedData& other) { data = other.data; bitSize = other.bitSize; return *this; }
+    ~CompressedData(){}
+
+    Uint8 * getDataPointer();
+    std::vector<Uint8>& getDataRef();
+    void dataResize(int size);
+    int getDataSize();
+    unsigned long getBitSize();
+    void setBitSize(unsigned long);
+
+    void writeBit(Uint8 bit);
+    Uint8 readBit();
+    void printData();
+    void encodeByte(Uint8 byte, int k);
+    Uint8 decodeByte(int k);
+};
+
+
+struct Bit3BMP
+{
+    std::vector <Uint8> data;
 };
 
 struct Pallete
@@ -16,8 +44,8 @@ struct Pallete
     SDL_Color c[8];
 };
 
-CompressedData compression( Bitmap & obraz);
-void dekompression (Bitmap & out, CompressedData & in);
+void compression(CompressedData &out, Bit3BMP &in );
+void dekompression (Bit3BMP & out, CompressedData & in);
 void test1(Screen & screen);
 
 void dittering(Bitmap & in, Bitmap & out, Pallete paleta);

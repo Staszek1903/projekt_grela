@@ -1,7 +1,12 @@
 #ifndef BITMAP_H
 #define BITMAP_H
 
-#include <SDL.h>
+#ifdef __linux__
+    #include <SDL/SDL.h>
+#else
+    #include <SDL.h>
+#endif
+
 #include <string>
 
 

@@ -1,4 +1,9 @@
-#include "algorytmy.h"
+#ifdef __linux__
+    #include "include/algorytmy.h"
+#else
+    #include "algorytmy.h"
+#endif
+
 #include <math.h>
 
 using namespace std;

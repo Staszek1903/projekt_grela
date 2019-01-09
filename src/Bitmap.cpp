@@ -1,4 +1,9 @@
-#include "Bitmap.h"
+#ifdef __linux__
+    #include "include/Bitmap.h"
+#else
+    #include "Bitmap.h"
+#endif
+
 
 Bitmap::Bitmap(int width, int height)
 {

@@ -1,6 +1,13 @@
-#include "algorytmy.h"
+
+#ifdef __linux__
+    #include "include/algorytmy.h"
+#else
+    #include "algorytmy.h"
+#endif
+
 #include <vector>
 #include <algorithm>
+
 using namespace std;
 
 bool sortCompRed(SDL_Color i, SDL_Color j)
@@ -115,6 +122,7 @@ Pallete getPallete(Bitmap & in)
 
 void test3(Screen & screen)
 {
+    printf("testuje 3\n");
     Bitmap bmp("obrazek4.bmp");
     Pallete paleta = getPallete(bmp);
     for(int k = 0; k < 8; ++k)
