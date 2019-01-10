@@ -15,9 +15,5 @@ void dittering(Bitmap & in, Bitmap & out, Pallete paleta)
 
 void test2(Screen & screen)
 {
-    fstream plik;
 
-    CreateFile(plik);
-    string format = "OKON";
-    plik<<format;
 }

@@ -45,6 +45,13 @@ enum EXCEPTION_CODE
 	alloc_problem
 };
 
+enum TYPE_OF_PALLETE
+{
+    DEFAULT,
+    DEDICATED,
+    GRAY_SCALE
+};
+
 
 struct Bit3BMP
 {

@@ -14,7 +14,8 @@ SOURCES += \
     src/dittering.cpp \
     src/compression.cpp \
     src/Screen.cpp \
-    src/Bitmap.cpp
+    src/Bitmap.cpp \
+    src/file_io.cpp
 
 HEADERS += \
     include/algorytmy.h \
