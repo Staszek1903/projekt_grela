@@ -96,6 +96,7 @@ void test3(Screen & screen);
 Pallete Reorder(Pallete paleta, Bitmap &in);
 Pallete NarzuconaPaleta();
 Pallete SkalaSzarosci();
+Pallete SkalaSzarosci(Pallete paleta);
 SDL_Color FindColor(SDL_Color pixel, Pallete paleta);
 int FindIndex(SDL_Color pixel, Pallete paleta);
 void to3bitBMP(Bitmap &in, Bitmap &out, Pallete paleta);
