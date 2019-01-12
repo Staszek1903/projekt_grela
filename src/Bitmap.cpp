@@ -5,16 +5,35 @@
 #endif
 
 
+Bitmap::Bitmap()
+    :surface(nullptr)
+{}
+
 Bitmap::Bitmap(int width, int height)
+    :surface(nullptr)
 {
     create(width, height);
 }
 
 Bitmap::Bitmap(std::string dir)
+    :surface(nullptr)
 {
     loadBMP(dir);
 }
 
+Bitmap::Bitmap(const Bitmap &other)
+    :surface(nullptr)
+{
+    create(other.getWidth(), other.getHeight());
+    draw(other,0,0);
+}
+
+Bitmap& Bitmap::operator= (const Bitmap &other)
+{
+    if(surface) SDL_FreeSurface(surface);
+    create(other.getWidth(), other.getHeight());
+    draw(other,0,0);
+}
 
 Bitmap::~Bitmap()
 {
@@ -30,6 +49,15 @@ void Bitmap::draw(SDL_Surface * screen, int x, int y)
     rect.y = y;
 
     SDL_BlitSurface(surface,nullptr,screen,&rect);
+}
+
+void Bitmap::draw(const Bitmap &other, int x, int y)
+{
+    SDL_Rect rect;
+    rect.x = x;
+    rect.y = y;
+
+    SDL_BlitSurface(other.surface,nullptr,surface,&rect);
 }
 
 void Bitmap::clear(SDL_Color color)
@@ -87,23 +115,25 @@ SDL_Color Bitmap::getPixel(int x, int y)
     return color;
 }
 
-int Bitmap::getWidth()
+int Bitmap::getWidth() const
 {
     return surface->w;
 }
 
-int Bitmap::getHeight()
+int Bitmap::getHeight() const
 {
     return surface->h;
 }
 
-Bitmap::Bitmap()
+bool Bitmap::isCreated()
 {
-
+    return static_cast<bool>(surface);
 }
 
 void Bitmap::loadBMP(std::string dir)
 {
+    if(surface) SDL_FreeSurface(surface);
+
     surface = SDL_LoadBMP(dir.c_str());
     if (!surface)
     {
@@ -113,6 +143,8 @@ void Bitmap::loadBMP(std::string dir)
 
 void Bitmap::create(int x,int y)
 {
+    if(surface) SDL_FreeSurface(surface);
+
     surface = SDL_CreateRGBSurface(0,
                                    x,
                                    y,

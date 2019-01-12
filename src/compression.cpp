@@ -144,6 +144,10 @@ void CompressedData::dataResize(int size)
 void compression( CompressedData& out, Bit3BMP& obraz)
 {
     int byteSize = obraz.data.size();
+    out.original_width = obraz.width;
+    out.original_height = obraz.height;
+    out.palete = obraz.paleta;
+
     out.dataResize(4);
 
     out.getDataRef().at(0) = byteSize;
@@ -163,6 +167,9 @@ void compression( CompressedData& out, Bit3BMP& obraz)
 void dekompression (Bit3BMP & out, CompressedData & in)
 {
     out.data.clear();
+    out.width = in.original_width;
+    out.height = in.original_height;
+    out.paleta = in.palete;
 
     int byteSize = in.getDataRef().at(3);
     byteSize = (byteSize<<8) | in.getDataRef().at(2);

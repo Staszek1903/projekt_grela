@@ -16,6 +16,8 @@
 class Bitmap
 {
 public:
+
+    Bitmap();
     /**
     * Bitmap(int,int) tworzy pusty obraz o wymiarach w na h
     */
@@ -25,8 +27,16 @@ public:
     */
     Bitmap(std::string dir);
 
-    Bitmap(const Bitmap &) = delete;
-    Bitmap& operator= (const Bitmap &) = delete;
+    /**
+     * @brief Konstruktor kopiuj?cy
+     */
+    Bitmap(const Bitmap &);
+
+    /**
+     * @brief Operator kopiowania
+     * @return refka na t? bitmape
+     */
+    Bitmap& operator= (const Bitmap &);
 
     virtual ~Bitmap();
 
@@ -34,6 +44,14 @@ public:
     * rysowanie obrazu na screen w miejscu x,y
     */
     void draw(SDL_Surface * screen, int x, int y);
+    /**
+     * @brief rysuje inn? bitmape na tej bitmapie w mijscu x,y
+     * @param other - bitmapa do narysowania
+     * @param x
+     * @param y
+     */
+    void draw(const Bitmap &other, int x, int y);
+
     /**
     * czysci ca³¹ bitmape na kolor color
     */
@@ -51,15 +69,15 @@ public:
     /**
     * zwracaj¹ szerokoœci i wysokoœæ bitmapy w pixelach
     */
-    int getWidth();
-    int getHeight();
+    int getWidth() const;
+    int getHeight() const;
+    bool isCreated();
+
+    void loadBMP(std::string dir);
+    void create(int x,int y);
 
 protected:
     SDL_Surface * surface;
-
-    Bitmap();
-    void loadBMP(std::string dir);
-    void create(int x,int y);
 };
 
 #endif // BITMAP_H

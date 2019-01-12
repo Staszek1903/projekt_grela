@@ -42,8 +42,3 @@ void Screen::flip()
 {
     SDL_Flip(surface);
 }
-
-void Screen::draw(Bitmap &bitmap, int x, int y)
-{
-    bitmap.draw(surface,x,y);
-}

@@ -28,7 +28,6 @@ public:
     /**
     * rysuje bitmape w oknie w miejscu x,y
     */
-    void draw(Bitmap &bitmap, int x, int y);
 };
 
 #endif // SCREEN_H
