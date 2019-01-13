@@ -8,16 +8,6 @@
 
 using namespace std;
 
-int FindIndex(SDL_Color pixel, Pallete paleta);
-Pallete NarzuconaPaleta();
-Pallete SkalaSzarosci();
-Pallete SkalaSzarosci(Pallete paleta);
-SDL_Color FindColor(SDL_Color pixel, Pallete paleta);
-int FindIndex(SDL_Color pixel, Pallete paleta);
-void to3bitBMP(Bitmap &in, Bitmap &out, Pallete paleta);
-Bit3BMP to3bitTab(Bitmap &in, Pallete paleta);
-void test4(Screen & screen);
-
 Pallete Reorder(Pallete paleta, Bitmap &in)
 {
 	int tab[8] = {};
