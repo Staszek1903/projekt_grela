@@ -6,12 +6,15 @@
     #include "include/Bitmap.h"
     #include "include/Screen.h"
     #include "include/algorytmy.h"
+    #include "include/button.h"
 #else
     #include <SDL.h>
     #include "Bitmap.h"
     #include "Screen.h"
     #include "algorytmy.h"
+    #include "button.h"
 #endif
+
 
 using namespace std;
 
@@ -19,12 +22,47 @@ using namespace std;
 //TODO class BUTTON
 //TODO copy constructors;
 
+class ButtonDrawer: public GuiDrawer
+{
+    Screen * screen;
+    SDL_Color color;
+public:
+    ButtonDrawer(Screen & screen, SDL_Color color) :screen(&screen), color(color) {}
+    virtual void draw(GuiNode * node) override;
+};
 
-using namespace std;
+class ButtonHandler: public GuiHandler
+{
+public:
+    virtual void handle(GuiNode * node) override;
+};
+
+void ButtonDrawer::draw(GuiNode * node)
+{
+    for(int i=node->x; i < node->x+node->w; ++i)
+        for(int j=node->y; j < node->y+node->h; ++j)
+            screen->setPixel(i,j,color);
+}
+
+void ButtonHandler::handle(GuiNode * node)
+{
+    printf("button pressed: %i %i\n", node->x, node->y);
+}
+
 
 int main ( int argc, char** argv )
 {
     Screen screen(900,600,"projekt_grela");
+    Button button, button2;
+    button.setPosition(0,0);
+    button2.setPosition(200,0);
+    button.setDimensions(100,100);
+    button2.setDimensions(100,100);
+    button.setName("BUTTON");
+    button.setDrawer(new ButtonDrawer(screen, {200,100,50}));
+    button2.setDrawer(new ButtonDrawer(screen, {50,100,200}));
+    button.setHandler(new ButtonHandler());
+    button2.setHandler(new ButtonHandler());
 
     // program main loop
     bool done = false;
@@ -34,6 +72,8 @@ int main ( int argc, char** argv )
         SDL_Event event;
         while (SDL_PollEvent(&event))
         {
+            button.draw();
+            button2.draw();
             // check for messages
             switch (event.type)
             {
@@ -66,6 +106,14 @@ int main ( int argc, char** argv )
                     if (event.key.keysym.sym == SDLK_b)
                         screen.clear({100,100,100});          break;
                      }
+            case SDL_MOUSEBUTTONDOWN:
+                //printf("Mouse click: %i %i\n", event.motion.x, event.motion.y);
+                GuiEvent ev;
+                ev.mouse_x = event.motion.x;
+                ev.mouse_y = event.motion.y;
+                button.update(&ev);
+                button2.update(&ev);
+
             } // end switch
         } // end of message processing
 
