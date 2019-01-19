@@ -104,9 +104,10 @@ void test2(Screen & screen)
    screen.flip();
 
    Pallete paleta = NarzuconaPaleta();
-   //dittering(bmp2, paleta);
-   to3bitBMP(bmp1,bmp11,paleta);
-   screen.draw(bmp11, bmp11.getWidth(), 0);
+   dittering(bmp1, paleta);
+
+   //to3bitBMP(bmp1,bmp11,paleta);
+   screen.draw(bmp1, bmp11.getWidth(), 0);
    screen.flip();
 
    paleta = getPallete(bmp3);

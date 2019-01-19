@@ -7,14 +7,17 @@
     #include "include/Screen.h"
     #include "include/algorytmy.h"
     #include "include/button.h"
+    #include "include/guimanager.h"
+    #include "include/sdlbutton.h"
 #else
     #include <SDL.h>
     #include "Bitmap.h"
     #include "Screen.h"
     #include "algorytmy.h"
     #include "button.h"
+    #include "guimanager.h"
+    #include "sdlbutton.h"
 #endif
-
 
 using namespace std;
 
@@ -22,58 +25,43 @@ using namespace std;
 //TODO class BUTTON
 //TODO copy constructors;
 
-class ButtonDrawer: public GuiDrawer
-{
-    Screen * screen;
-    SDL_Color color;
-public:
-    ButtonDrawer(Screen & screen, SDL_Color color) :screen(&screen), color(color) {}
-    virtual void draw(GuiNode * node) override;
-};
-
-class ButtonHandler: public GuiHandler
-{
-public:
-    virtual void handle(GuiNode * node) override;
-};
-
-void ButtonDrawer::draw(GuiNode * node)
-{
-    for(int i=node->x; i < node->x+node->w; ++i)
-        for(int j=node->y; j < node->y+node->h; ++j)
-            screen->setPixel(i,j,color);
-}
-
-void ButtonHandler::handle(GuiNode * node)
-{
-    printf("button pressed: %i %i\n", node->x, node->y);
-}
-
-
 int main ( int argc, char** argv )
 {
     Screen screen(900,600,"projekt_grela");
-    Button button, button2;
-    button.setPosition(0,0);
-    button2.setPosition(200,0);
-    button.setDimensions(100,100);
-    button2.setDimensions(100,100);
-    button.setName("BUTTON");
-    button.setDrawer(new ButtonDrawer(screen, {200,100,50}));
-    button2.setDrawer(new ButtonDrawer(screen, {50,100,200}));
-    button.setHandler(new ButtonHandler());
-    button2.setHandler(new ButtonHandler());
+    GuiManager manager;
+    Button * button = (Button *)manager.addNode(new Button),
+            * button2 = (Button *)manager.addNode(new Button);
+    button->setPosition(300,300);
+    button2->setPosition(200,200);
+    button->setDimensions(200,50);
+    button2->setDimensions(200,50);
+    button->setName("BUTTON");
+    button->setDrawer(new ButtonDrawer(screen, {200,100,50}));
+    button2->setDrawer(new ButtonDrawer(screen, {50,100,200}));
+    button->setHandler(new ButtonHandler());
+    button2->setHandler(new ButtonHandler());
+
+    screen.clear({171,200,50});
+
+
+    Uint32 start_ticks = SDL_GetTicks();
 
     // program main loop
     bool done = false;
     while (!done)
     {
+        Uint32 new_ticks = SDL_GetTicks();
+        if((new_ticks - start_ticks)>50)
+        {
+            manager.draw();
+            start_ticks = new_ticks;
+        }
+
         // message processing loop
         SDL_Event event;
         while (SDL_PollEvent(&event))
         {
-            button.draw();
-            button2.draw();
+            GuiEvent ev;
             // check for messages
             switch (event.type)
             {
@@ -85,6 +73,11 @@ int main ( int argc, char** argv )
                 // check for keypresses
             case SDL_KEYDOWN:
                 {
+
+                    ev.char_clicked = event.key.keysym.sym;
+
+                    printf("key: %i %c\n", ev.char_clicked, (char)ev.char_clicked);
+
                     // exit if ESCAPE is pressed
                     if (event.key.keysym.sym == SDLK_ESCAPE)
                         done = true;
@@ -106,15 +99,27 @@ int main ( int argc, char** argv )
                     if (event.key.keysym.sym == SDLK_b)
                         screen.clear({100,100,100});          break;
                      }
-            case SDL_MOUSEBUTTONDOWN:
-                //printf("Mouse click: %i %i\n", event.motion.x, event.motion.y);
-                GuiEvent ev;
+
+            case SDL_MOUSEMOTION:
                 ev.mouse_x = event.motion.x;
                 ev.mouse_y = event.motion.y;
-                button.update(&ev);
-                button2.update(&ev);
+                break;
 
+            case SDL_MOUSEBUTTONDOWN:
+                //printf("Mouse click: %i %i\n", event.motion.x, event.motion.y);
+                ev.mouse_x = event.motion.x;
+                ev.mouse_y = event.motion.y;
+                ev.mouse_pressed = true;
+                break;
+
+            case SDL_MOUSEBUTTONUP:
+                ev.mouse_x = event.motion.x;
+                ev.mouse_y = event.motion.y;
+                ev.mouse_released = true;
+                break;
             } // end switch
+
+            manager.update(&ev);
         } // end of message processing
 
         screen.flip();

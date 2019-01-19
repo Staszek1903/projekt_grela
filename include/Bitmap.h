@@ -41,9 +41,9 @@ public:
     virtual ~Bitmap();
 
     /**
-    * rysowanie obrazu na screen w miejscu x,y
+    * rysowanie other na bitmapie w miejscu x,y
     */
-    void draw(SDL_Surface * screen, int x, int y);
+    void draw(SDL_Surface * other, int x, int y);
     /**
      * @brief rysuje inn? bitmape na tej bitmapie w mijscu x,y
      * @param other - bitmapa do narysowania

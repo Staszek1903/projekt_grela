@@ -17,6 +17,13 @@ public:
     void setName(std::string name);
     virtual void update(GuiEvent * event) override;
     virtual void draw() override;
+
+    int state;
+    enum{
+        STAND_BUY,
+        HAS_MOUSE,
+        CLICKED
+    };
 };
 
 #endif // BUTTON_H

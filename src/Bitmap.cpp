@@ -42,13 +42,13 @@ Bitmap::~Bitmap()
 }
 
 
-void Bitmap::draw(SDL_Surface * screen, int x, int y)
+void Bitmap::draw(SDL_Surface * other, int x, int y)
 {
     SDL_Rect rect;
     rect.x = x;
     rect.y = y;
 
-    SDL_BlitSurface(surface,nullptr,screen,&rect);
+    SDL_BlitSurface(other, nullptr,surface,&rect);
 }
 
 void Bitmap::draw(const Bitmap &other, int x, int y)

@@ -1,7 +1,9 @@
 #ifdef __linux__
     #include "include/Screen.h"
+    #include "SDL/SDL_ttf.h"
 #else
     #include "Screen.h"
+    #include "SDL_ttf.h"
 #endif
 
 Screen::Screen(int width, int height, std::string name)
@@ -11,14 +13,17 @@ Screen::Screen(int width, int height, std::string name)
     //freopen( "CON", "wt", stderr );
 
     // initialize SDL video
-    if ( SDL_Init( SDL_INIT_VIDEO ) < 0 )
+    if ( SDL_Init( SDL_INIT_VIDEO | SDL_INIT_TIMER) < 0 )
     {
         printf( "Unable to init SDL: %s\n", SDL_GetError() );
         return;
     }
 
-    // make sure SDL cleans up before exit
-    atexit(SDL_Quit);
+    if ( TTF_Init() <0 )
+    {
+        printf( "Unable to init TTF: %s\n", TTF_GetError() );
+        return;
+    }
 
     // create a new window
     surface = SDL_SetVideoMode(width, height, 32,
@@ -36,6 +41,9 @@ Screen::~Screen()
 {
     if(surface)
         SDL_FreeSurface(surface);
+
+    SDL_Quit();
+    TTF_Quit();
 }
 
 void Screen::flip()
