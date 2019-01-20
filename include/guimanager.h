@@ -8,6 +8,7 @@
 #endif
 
 #include <vector>
+#include <cstdio>
 
 class GuiManager
 {
@@ -15,7 +16,6 @@ class GuiManager
 public:
     GuiNode * addNode(GuiNode *);
     void update(GuiEvent *);
-    void draw();
 
     GuiManager();
     ~GuiManager();

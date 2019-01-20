@@ -28,6 +28,7 @@ public:
     virtual ~ButtonDrawer() override;
     virtual void draw(GuiNode * node) override;
 
+    void createText(std::string text);
     void createStandBy(int w, int h);
     void createHasMouse(int w, int h);
     void createCLicked(int w, int h);

@@ -13,11 +13,13 @@ class Button : public GuiNode
     std::string name;
 public:
     Button();
+    Button(std::string name, int x, int y, int w, int h, GuiHandler* handler, GuiDrawer * drawer);
     virtual ~Button() override;
     void setName(std::string name);
+    std::string getName();
     virtual void update(GuiEvent * event) override;
-    virtual void draw() override;
 
+    int prev_state;
     int state;
     enum{
         STAND_BUY,

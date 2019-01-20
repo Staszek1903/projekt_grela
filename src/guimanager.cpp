@@ -13,14 +13,9 @@ GuiNode *GuiManager::addNode(GuiNode * n)
 
 void GuiManager::update(GuiEvent * ev)
 {
+    //printf("size: %i\n", nodes.size());
     for(auto n : nodes)
         n->update(ev);
-}
-
-void GuiManager::draw()
-{
-    for(auto n : nodes)
-        n->draw();
 }
 
 GuiManager::GuiManager()

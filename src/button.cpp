@@ -1,17 +1,30 @@
 #include "include/button.h"
 
 Button::Button()
-    :state(STAND_BUY)
+    :prev_state(-1),state(STAND_BUY)
 {}
+
+Button::Button(std::string name, int x, int y, int w, int h, GuiHandler *handler, GuiDrawer *drawer)
+{
+    setName(name);
+    setPosition(x,y);
+    setDimensions(w,h);
+    setHandler(handler);
+    setDrawer(drawer);
+}
 
 Button::~Button()
 {
-    //GuiNode::~GuiNode();
 }
 
 void Button::setName(std::string name)
 {
     this->name = name;
+}
+
+std::string Button::getName()
+{
+    return  name;
 }
 
 void Button::update(GuiEvent *event)
@@ -29,9 +42,11 @@ void Button::update(GuiEvent *event)
     }
     else
         state = STAND_BUY;
-}
 
-void Button::draw()
-{
-    if(drawer) drawer->draw(this);
+
+    if(prev_state != state)
+    {
+        if(drawer) drawer->draw(this);
+        prev_state = state;
+    }
 }

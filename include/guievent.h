@@ -1,6 +1,9 @@
 #ifndef GUIEVENT_H
 #define GUIEVENT_H
 
+#define ENTER 13
+#define BACKSPACE 8
+
 struct GuiEvent
 {
     int mouse_x, mouse_y;

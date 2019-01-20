@@ -9,6 +9,8 @@
     #include "include/button.h"
     #include "include/guimanager.h"
     #include "include/sdlbutton.h"
+    #include "include/textfield.h"
+    #include "include/sdltextfield.h"
 #else
     #include <SDL.h>
     #include "Bitmap.h"
@@ -17,6 +19,8 @@
     #include "button.h"
     #include "guimanager.h"
     #include "sdlbutton.h"
+    #include "textfield.h"
+    #include "sdltextfield.h"
 #endif
 
 using namespace std;
@@ -29,33 +33,24 @@ int main ( int argc, char** argv )
 {
     Screen screen(900,600,"projekt_grela");
     GuiManager manager;
-    Button * button = (Button *)manager.addNode(new Button),
-            * button2 = (Button *)manager.addNode(new Button);
-    button->setPosition(300,300);
-    button2->setPosition(200,200);
-    button->setDimensions(200,50);
-    button2->setDimensions(200,50);
-    button->setName("BUTTON");
-    button->setDrawer(new ButtonDrawer(screen, {200,100,50}));
-    button2->setDrawer(new ButtonDrawer(screen, {50,100,200}));
-    button->setHandler(new ButtonHandler());
-    button2->setHandler(new ButtonHandler());
-
-    screen.clear({171,200,50});
+    manager.addNode(new TextField("File Name", 25,25,200,50, nullptr, new TexFieldDrawer(screen,{200,200,255})));
+    manager.addNode(new Button("LOAD BMP",25,80,200,50,new ButtonHandler, new ButtonDrawer(screen,{255,255,255})));
+    manager.addNode(new Button("LOAD OKON",25,135,200,50,new ButtonHandler, new ButtonDrawer(screen,{255,255,255})));
+    manager.addNode(new Button("SAVE BMP",25,190,200,50,new ButtonHandler, new ButtonDrawer(screen,{255,255,255})));
+    manager.addNode(new Button("SAVE OKON",25,245,200,50,new ButtonHandler, new ButtonDrawer(screen,{255,255,255})));
+    manager.addNode(new Button("TEST1",25,300,200,50,new ButtonHandler, new ButtonDrawer(screen,{255,255,255})));
+    manager.addNode(new Button("TEST2",25,355,200,50,new ButtonHandler, new ButtonDrawer(screen,{255,255,255})));
+    manager.addNode(new Button("TEST3",25,410,200,50,new ButtonHandler, new ButtonDrawer(screen,{255,255,255})));
+    manager.addNode(new Button("TEST4",25,465,200,50,new ButtonHandler, new ButtonDrawer(screen,{255,255,255})));
+    manager.addNode(new Button("TEST5",25,520,200,50,new ButtonHandler, new ButtonDrawer(screen,{255,255,255})));
 
 
-    Uint32 start_ticks = SDL_GetTicks();
+    screen.clear({0,0,0});
 
     // program main loop
     bool done = false;
     while (!done)
     {
-        Uint32 new_ticks = SDL_GetTicks();
-        if((new_ticks - start_ticks)>50)
-        {
-            manager.draw();
-            start_ticks = new_ticks;
-        }
 
         // message processing loop
         SDL_Event event;
@@ -76,7 +71,7 @@ int main ( int argc, char** argv )
 
                     ev.char_clicked = event.key.keysym.sym;
 
-                    printf("key: %i %c\n", ev.char_clicked, (char)ev.char_clicked);
+                    //printf("key: %i %c\n", ev.char_clicked, (char)ev.char_clicked);
 
                     // exit if ESCAPE is pressed
                     if (event.key.keysym.sym == SDLK_ESCAPE)

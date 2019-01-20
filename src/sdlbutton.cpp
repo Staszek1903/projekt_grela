@@ -5,25 +5,17 @@
 #endif
 
 ButtonDrawer::ButtonDrawer(Screen & screen, SDL_Color color)
-    :screen(&screen), color(color), stand_by(nullptr), has_mouse(nullptr), clicked(nullptr)
+    :screen(&screen), color(color), text(nullptr), stand_by(nullptr), has_mouse(nullptr), clicked(nullptr)
 {
-    TTF_Font *font = TTF_OpenFont("font.ttf",32);
-    if(!font)
-        {printf("UNABLE TO LOAD FONT\n"); return;}
 
-    text = TTF_RenderText_Solid(font, "SAMPLE text",{0,0,0});
-    if(!text)
-        printf("UNABLE TO CREATE TEXT\n");
-
-    TTF_CloseFont(font);
 }
 
 ButtonDrawer::~ButtonDrawer()
 {
-    delete stand_by;
-    delete has_mouse;
-    delete clicked;
-    SDL_FreeSurface(text);
+    if(stand_by) delete stand_by;
+    if(has_mouse) delete has_mouse;
+    if(clicked) delete clicked;
+    if(text) SDL_FreeSurface(text);
 }
 
 void ButtonDrawer::draw(GuiNode * node)
@@ -31,6 +23,7 @@ void ButtonDrawer::draw(GuiNode * node)
     Button * b = static_cast<Button *>(node);
     Bitmap temp(b->w, b->h);
 
+    if(!text) createText(b->getName());
     if(!stand_by) createStandBy(b->w,b->h);
     if(!has_mouse) createHasMouse(b->w,b->h);
     if(!clicked) createCLicked(b->w,b->h);
@@ -41,6 +34,19 @@ void ButtonDrawer::draw(GuiNode * node)
         screen->draw(*has_mouse,b->x,b->y);
     else if(b->state == Button::CLICKED)
         screen->draw(*clicked,b->x,b->y);
+}
+
+void ButtonDrawer::createText(std::string ctext)
+{
+    TTF_Font *font = TTF_OpenFont("font.ttf",32);
+    if(!font)
+        {printf("UNABLE TO LOAD FONT\n"); return;}
+
+    text = TTF_RenderText_Solid(font, ctext.c_str(),{0,0,0});
+    if(!text)
+        printf("UNABLE TO CREATE TEXT\n");
+
+    TTF_CloseFont(font);
 }
 
 void ButtonDrawer::createStandBy(int w, int h)
