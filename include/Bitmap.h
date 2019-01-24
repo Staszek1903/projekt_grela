@@ -71,9 +71,10 @@ public:
     */
     int getWidth() const;
     int getHeight() const;
-    bool isCreated();
+    bool isCreated() const;
 
     void loadBMP(std::string dir);
+    bool saveBMP(std::string dir);
     void create(int x,int y);
 
 protected:

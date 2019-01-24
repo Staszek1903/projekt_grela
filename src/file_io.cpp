@@ -71,9 +71,10 @@ void binaryRead(std::fstream & file, T& value)
         bytes[i] = file.get();
 }
 
-void write_to_okon(std::string dir, CompressedData& data)
+bool write_to_okon(std::string dir, CompressedData& data)
 {
     auto file = OpenFile(dir, std::ios::binary | std::ios::out);
+    if(!file.good()) return  false;
     char format[] = "OKON";
     int width = data.original_width;
     int height = data.original_height;
@@ -100,11 +101,15 @@ void write_to_okon(std::string dir, CompressedData& data)
 
     //printf("DEBUG: %i  %i  %i\n", size, width, height);
     file.close();
+
+    return true;
 }
 
-void read_from_okon(std::string dir, CompressedData &data)
+bool read_from_okon(std::string dir, CompressedData &data)
 {
     auto file = OpenFile(dir, std::ios::in|std::ios::binary);
+    if(!file.good()) return false;
+
     char format[5];
     int size, width, height;
     Uint8 pallete_type;
@@ -158,6 +163,7 @@ void read_from_okon(std::string dir, CompressedData &data)
    // printf("OUTPUT DEBUG: %i  %i  %i %s\n", size, width, height, format);
 
     file.close();
+    return true;
 }
 
 template <typename T>

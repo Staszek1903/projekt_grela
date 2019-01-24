@@ -18,6 +18,12 @@ void GuiManager::update(GuiEvent * ev)
         n->update(ev);
 }
 
+void GuiManager::draw()
+{
+    for(auto n: nodes)
+        n->draw();
+}
+
 GuiManager::GuiManager()
 {
 

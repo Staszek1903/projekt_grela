@@ -1,3 +1,7 @@
+#ifndef ALGORYTMY_H_
+#define ALGORYTMY_H_
+
+
 #ifdef __linux__
     #include <SDL/SDL.h>
 #else
@@ -107,7 +111,10 @@ void test4(Screen & screen);
 
 void seeExceptions(EXCEPTION_CODE error);
 
-void CreateFile(std::fstream &file);
-void OpenFile(std::fstream &file);
+bool write_to_okon(std::string dir, CompressedData& data);
+bool read_from_okon(std::string dir, CompressedData &data);
 
 void test5(Screen & screen);
+
+
+#endif /* ALGORYTMY_H_ */

@@ -29,6 +29,7 @@ public:
     void setHandler( GuiHandler * handler );
     void setDrawer( GuiDrawer * drawer);
     virtual void update( GuiEvent * event ) =0;
+    virtual void draw();
 };
 
 #endif // GUINODE_H

@@ -21,7 +21,9 @@ SOURCES += \
     src/guimanager.cpp \
     src/sdlbutton.cpp \
     src/textfield.cpp \
-    src/sdltextfield.cpp
+    src/sdltextfield.cpp \
+    src/handlers.cpp \
+    src/guibitmap.cpp
 
 HEADERS += \
     include/algorytmy.h \
@@ -36,4 +38,6 @@ HEADERS += \
     include/guimanager.h \
     include/sdlbutton.h \
     include/textfield.h \
-    include/sdltextfield.h
+    include/sdltextfield.h \
+    include/handlers.h \
+    include/guibitmap.h

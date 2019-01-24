@@ -16,6 +16,7 @@ class GuiManager
 public:
     GuiNode * addNode(GuiNode *);
     void update(GuiEvent *);
+    void draw();
 
     GuiManager();
     ~GuiManager();

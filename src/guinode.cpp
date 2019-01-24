@@ -30,3 +30,8 @@ void GuiNode::setDrawer(GuiDrawer *drawer)
 {
     this->drawer = drawer;
 }
+
+void GuiNode::draw()
+{
+    if(drawer) drawer->draw(this);
+}

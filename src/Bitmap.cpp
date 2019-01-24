@@ -125,7 +125,7 @@ int Bitmap::getHeight() const
     return surface->h;
 }
 
-bool Bitmap::isCreated()
+bool Bitmap::isCreated() const
 {
     return static_cast<bool>(surface);
 }
@@ -139,6 +139,18 @@ void Bitmap::loadBMP(std::string dir)
     {
         printf("Unable to load bitmap: %s\n", SDL_GetError());
     }
+}
+
+bool Bitmap::saveBMP(std::string dir)
+{
+    if(!surface) return false;
+    if(SDL_SaveBMP(surface, dir.c_str()) != 0)
+    {
+        printf("SAVING ERROR: %s\n", SDL_GetError());
+        return false;
+    }
+
+    return true;
 }
 
 void Bitmap::create(int x,int y)
@@ -155,4 +167,3 @@ void Bitmap::create(int x,int y)
         printf("Unable to create bitmap: %s\n", SDL_GetError());
     }
 }
-
