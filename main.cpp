@@ -12,6 +12,7 @@
     #include "include/textfield.h"
     #include "include/sdltextfield.h"
     #include "include/handlers.h"
+    #include "include/guipallete.h"
 #else
     #include <SDL.h>
     #include "Bitmap.h"
@@ -23,6 +24,7 @@
     #include "textfield.h"
     #include "sdltextfield.h"
     #include "handlers.h"
+    #include "guipallete.h"
 #endif
 
 using namespace std;
@@ -35,18 +37,21 @@ int main ( int argc, char** argv )
 {
     Screen screen(900,600,"projekt_grela");
     GuiManager manager;
+    auto pallete = (GuiPallete * )manager.addNode(new GuiPallete(screen, 455,25));
 
-    auto bitmap = (GuiBitmap *)manager.addNode((new GuiBitmap(screen.getWidth()/2,screen.getHeight()/2,screen)));
+    auto bitmap = (GuiBitmap *)manager.addNode(new GuiBitmap(screen.getWidth()/2,screen.getHeight()/2,screen));
     auto textfield = (TextField *)manager.addNode(new TextField("File Name", 25,25,400,50, nullptr, new TexFieldDrawer(screen,{200,200,255})));
     manager.addNode(new Button("LOAD BMP",25,80,200,50,new OpenBmpHandler(*textfield,*bitmap), new ButtonDrawer(screen,{255,255,255})));
     manager.addNode(new Button("LOAD OKON",25,135,200,50,new OpenOkonHandler(*textfield,*bitmap), new ButtonDrawer(screen,{255,255,255})));
     manager.addNode(new Button("SAVE BMP",25,190,200,50,new SaveBmpHandler(*textfield,*bitmap), new ButtonDrawer(screen,{255,255,255})));
-    manager.addNode(new Button("SAVE OKON",25,245,200,50,new ButtonHandler, new ButtonDrawer(screen,{255,255,255})));
-    manager.addNode(new Button("TEST1",25,300,200,50,new ButtonHandler, new ButtonDrawer(screen,{255,255,255})));
-    manager.addNode(new Button("TEST2",25,355,200,50,new ButtonHandler, new ButtonDrawer(screen,{255,255,255})));
-    manager.addNode(new Button("TEST3",25,410,200,50,new ButtonHandler, new ButtonDrawer(screen,{255,255,255})));
-    manager.addNode(new Button("TEST4",25,465,200,50,new ButtonHandler, new ButtonDrawer(screen,{255,255,255})));
-    manager.addNode(new Button("TEST5",25,520,200,50,new ButtonHandler, new ButtonDrawer(screen,{255,255,255})));
+    manager.addNode(new Button("SAVE OKON",25,245,200,50,new SaveOkonHandler(*textfield,*bitmap,*pallete), new ButtonDrawer(screen,{255,255,255})));
+    manager.addNode(new Button("^",455,245,50,50,new PaleteDownHandler(*pallete), new ButtonDrawer(screen,{255,255,255})));
+    manager.addNode(new Button("GENERATE",510,245,200,50,new PaleteGenerateHandler(*pallete, *bitmap), new ButtonDrawer(screen,{255,255,255})));
+    manager.addNode(new Button("v",715,245,50,50,new PaleteUpHandler(*pallete), new ButtonDrawer(screen,{255,255,255})));
+
+    manager.addNode(new Button("ORIGINAL",25,400,200,50,new OriginalHandler(*pallete,*bitmap), new ButtonDrawer(screen,{255,255,255})));
+    manager.addNode(new Button("3BIT",25,455,200,50,new Bit3Handler(*pallete,*bitmap), new ButtonDrawer(screen,{255,255,255})));
+    manager.addNode(new Button("3BIT+Ditter",25,510,200,50,new Bit3DitterHandler(*pallete,*bitmap), new ButtonDrawer(screen,{255,255,255})));
 
 
     screen.clear({0,0,0});
@@ -75,29 +80,6 @@ int main ( int argc, char** argv )
             case SDL_KEYDOWN:
                     ev.char_clicked = event.key.keysym.sym;
             break;
-                    //printf("key: %i %c\n", ev.char_clicked, (char)ev.char_clicked);
-
-                    // exit if ESCAPE is pressed
-//                    if (event.key.keysym.sym == SDLK_ESCAPE)
-//                        done = true;
-//                    if (event.key.keysym.sym == SDLK_1) test1(screen);
-//                    if (event.key.keysym.sym == SDLK_2) test2(screen);
-//                    if (event.key.keysym.sym == SDLK_3) test3(screen);
-//                    if (event.key.keysym.sym == SDLK_4) test4(screen);
-//                    if (event.key.keysym.sym == SDLK_5) test5(screen);
-//                    if (event.key.keysym.sym == SDLK_a)
-//                        {Bitmap bmp("obrazek1.bmp"); screen.draw(bmp,0,0);}
-//                    if (event.key.keysym.sym == SDLK_s)
-//                        {Bitmap bmp("obrazek2.bmp"); screen.draw(bmp,0,0);}
-//                    if (event.key.keysym.sym == SDLK_d)
-//                        {Bitmap bmp("obrazek3.bmp"); screen.draw(bmp,0,0);}
-//                    if (event.key.keysym.sym == SDLK_f)
-//                        {Bitmap bmp("obrazek4.bmp"); screen.draw(bmp,0,0);}
-//                    if (event.key.keysym.sym == SDLK_g)
-//                        {Bitmap bmp("obrazek5.bmp"); screen.draw(bmp,0,0);}
-//                    if (event.key.keysym.sym == SDLK_b)
-//                        screen.clear({100,100,100});          break;
-//                     }
 
             case SDL_MOUSEMOTION:
                 ev.mouse_x = event.motion.x;

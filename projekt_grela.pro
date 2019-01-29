@@ -23,7 +23,8 @@ SOURCES += \
     src/textfield.cpp \
     src/sdltextfield.cpp \
     src/handlers.cpp \
-    src/guibitmap.cpp
+    src/guibitmap.cpp \
+    src/guipallete.cpp
 
 HEADERS += \
     include/algorytmy.h \
@@ -40,4 +41,5 @@ HEADERS += \
     include/textfield.h \
     include/sdltextfield.h \
     include/handlers.h \
-    include/guibitmap.h
+    include/guibitmap.h \
+    include/guipallete.h
