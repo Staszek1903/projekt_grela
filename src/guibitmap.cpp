@@ -6,36 +6,43 @@
 
 
 GuiBitmap::GuiBitmap(int x, int y, Screen &screen)
-    :screen(screen), active(0)
+    :screen(screen),bitmaps(2), active(0)
 {
     this->x = x;
     this->y = y;
 }
 
-Bitmap &GuiBitmap::addBitmap(const Bitmap &bitmap, int type_of_pallete)
+Bitmap &GuiBitmap::setOiginal(const Bitmap &bmp)
 {
-    bitmaps.push_back(bitmap);
-    palletes_info.push_back(type_of_pallete);
-
-    active = bitmaps.size()-1;
-
-
+    bitmaps.at(0) = bmp;
+    active = 0;
     draw();
+
+    return bitmaps.at(0);
+}
+
+Bitmap &GuiBitmap::set3bit(const Bitmap &bmp)
+{
+    bitmaps.at(1) = bmp;
+    active = 1;
+    draw();
+
+    return bitmaps.at(1);
+}
+
+Bitmap &GuiBitmap::getOriginal()
+{
+    return bitmaps.at(0);
+}
+
+Bitmap &GuiBitmap::get3bit()
+{
+    return bitmaps.at(1);
+}
+
+Bitmap &GuiBitmap::getActive()
+{
     return bitmaps.at(active);
-}
-
-Bitmap &GuiBitmap::getBitmap(int index)
-{
-    index = (index < bitmaps.size())? index : 0;
-    index = (index <0)? active : index;
-    return bitmaps.at(index);
-}
-
-int GuiBitmap::getPalleteInfo(int index)
-{
-    index = (index < palletes_info.size())? index : 0;
-    index = (index <0)? active : index;
-    return palletes_info.at(index);
 }
 
 void GuiBitmap::setActive(int a)

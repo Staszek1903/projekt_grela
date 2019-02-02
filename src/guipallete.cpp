@@ -20,6 +20,8 @@ void GuiPallete::setGeneratedPalete(Pallete p)
     palety[3] = SkalaSzarosci(p);
     setted = true;
 
+
+    printf("redrawwww !!!!!!!");
     draw();
 }
 

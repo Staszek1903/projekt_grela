@@ -18,13 +18,13 @@ SOURCES += \
     src/file_io.cpp \
     src/button.cpp \
     src/guinode.cpp \
-    src/guimanager.cpp \
     src/sdlbutton.cpp \
     src/textfield.cpp \
     src/sdltextfield.cpp \
     src/handlers.cpp \
     src/guibitmap.cpp \
-    src/guipallete.cpp
+    src/guipallete.cpp \
+    src/guimanager.cpp
 
 HEADERS += \
     include/algorytmy.h \
@@ -36,10 +36,10 @@ HEADERS += \
     include/guihandler.h \
     include/guievent.h \
     include/guidrawer.h \
-    include/guimanager.h \
     include/sdlbutton.h \
     include/textfield.h \
     include/sdltextfield.h \
     include/handlers.h \
     include/guibitmap.h \
-    include/guipallete.h
+    include/guipallete.h \
+    include/guimanager.h

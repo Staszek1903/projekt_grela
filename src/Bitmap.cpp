@@ -30,7 +30,7 @@ Bitmap::Bitmap(const Bitmap &other)
 
 Bitmap& Bitmap::operator= (const Bitmap &other)
 {
-    if(surface) SDL_FreeSurface(surface);
+    //if(surface) SDL_FreeSurface(surface);
     create(other.getWidth(), other.getHeight());
     draw(other,0,0);
 }

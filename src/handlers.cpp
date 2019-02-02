@@ -14,7 +14,7 @@ void OpenBmpHandler::handle(GuiNode *)
 
 
 
-    auto & temp = bitmap.addBitmap(Bitmap(filename.text),ORIGINAL);
+    auto & temp = bitmap.setOiginal(Bitmap(filename.text));
 
     if(!temp.isCreated())
     {
@@ -37,7 +37,7 @@ void SaveBmpHandler::handle(GuiNode *)
 {
     printf("saving: %s\n",filename.text.c_str());
 
-    auto & temp = bitmap.getBitmap(-1);
+    auto & temp = bitmap.getActive();
     if(temp.saveBMP(filename.text))
     {
         filename.text = "SAVED";
@@ -74,7 +74,7 @@ void OpenOkonHandler::handle(GuiNode *)
     dekompression(bit3,data);
     bit3toBitmap(bit3,bmp);
 
-    bitmap.addBitmap(bmp,0);
+    bitmap.set3bit(bmp);
     bitmap.draw();
 }
 
@@ -84,7 +84,9 @@ SaveOkonHandler::SaveOkonHandler(TextField &filename, GuiBitmap &bitmap, GuiPall
 
 void SaveOkonHandler::handle(GuiNode *)
 {
-     auto & current = bitmap.getBitmap(-1);
+     auto & current = bitmap.get3bit();
+     if(!current.isCreated()) return;
+
      Bit3BMP bit3= to3bitTab(current,guipallete.getActivePallete());
      std::string dir = filename.text;
 
@@ -135,13 +137,13 @@ void PaleteGenerateHandler::handle(GuiNode * me)
    auto m = (Button *) me;
    m->setName("GENERATING");
    m->draw();
-   auto & current = bitmap.getBitmap(-1);
+   auto & current = bitmap.getOriginal();
     if(current.isCreated())
     {
         Pallete dedicated = getPallete(current);
         dedicated = Reorder(dedicated,current);
 
-        guipallete.setGeneratedPalete(dedicated);
+        guipallete.setGeneratedPalete(dedicated);               /////////
     }
 
     m->setName("GENERATE");
@@ -155,12 +157,12 @@ Bit3Handler::Bit3Handler(GuiPallete &pallete, GuiBitmap &bitmap)
 
 void Bit3Handler::handle(GuiNode *)
 {
-    auto & current = bitmap.getBitmap(-1);
+    auto & current = bitmap.getOriginal();
     Pallete pallet = guipallete.getActivePallete();
     Bitmap out;
     to3bitBMP(current,out,pallet);
 
-    bitmap.addBitmap(out,0);
+    bitmap.set3bit(out);
 }
 
 Bit3DitterHandler::Bit3DitterHandler(GuiPallete &pallete, GuiBitmap &bitmap)
@@ -170,11 +172,13 @@ Bit3DitterHandler::Bit3DitterHandler(GuiPallete &pallete, GuiBitmap &bitmap)
 
 void Bit3DitterHandler::handle(GuiNode *)
 {
-    auto & current = bitmap.getBitmap(-1);
+    auto & current = bitmap.getOriginal();
+    if(!current.isCreated()) return;
+
     Pallete pallet = guipallete.getActivePallete();
     Bitmap out = current;
     dittering(out,pallet);
-    bitmap.addBitmap(out,0);
+    bitmap.set3bit(out);
 }
 
 OriginalHandler::OriginalHandler(GuiPallete &pallete, GuiBitmap &bitmap)

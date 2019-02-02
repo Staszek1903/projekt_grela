@@ -36,6 +36,7 @@ void TextField::update(GuiEvent *event)
 
     if(active)
     {
+        //printf("%i\n", (char)event->char_clicked );
         if(std::isprint(event->char_clicked))
         {
             text = text + (char)event->char_clicked;
