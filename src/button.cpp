@@ -1,4 +1,8 @@
-#include "include/button.h"
+#ifdef __linux__
+    #include "include/button.h"
+#else
+    #include "button.h"
+#endif
 
 Button::Button()
     :prev_state(-1),state(STAND_BUY)

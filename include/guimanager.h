@@ -1,6 +1,3 @@
-#ifndef GUIMANAGER_H
-#define GUIMANAGER_H
-
 #ifdef __linux__
     #include "include/guinode.h"
 #else
@@ -21,5 +18,3 @@ public:
     GuiManager();
     ~GuiManager();
 };
-
-#endif // GUIMANAGER_H
