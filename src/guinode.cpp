@@ -1,4 +1,8 @@
-#include "guinode.h"
+#ifdef __linux__
+    #include "include/guinode.h"
+#else
+    #include "guinode.h"
+#endif
 
 GuiNode::GuiNode()
     :handler(nullptr), drawer(nullptr),x(0),y(0),w(0),h(0){};

@@ -19,7 +19,7 @@ void OpenBmpHandler::handle(GuiNode *)
     if(!temp.isCreated())
     {
         filename.text = filename.text + "BAD";
-        //printf("canot open\n");
+        printf("canot open\n");
     }
     else
     {
@@ -74,7 +74,7 @@ void OpenOkonHandler::handle(GuiNode *)
     dekompression(bit3,data);
     bit3toBitmap(bit3,bmp);
 
-    bitmap.set3bit(bmp);
+    bitmap.set3bit(bmp,bit3.paleta);
     bitmap.draw();
 }
 
@@ -87,7 +87,18 @@ void SaveOkonHandler::handle(GuiNode *)
      auto & current = bitmap.get3bit();
      if(!current.isCreated()) return;
 
-     Bit3BMP bit3= to3bitTab(current,guipallete.getActivePallete());
+     Pallete current_pallete = bitmap.getPallete();
+
+     Bitmap bitmapa(160,20);
+         for(int i = 0; i < 8; i++)
+             for(int j = 0; j < 20; j++)
+                 for(int k = 0; k < 20; k++)
+             bitmapa.setPixel(k+i*20,j,current_pallete.c[i]);
+         bitmap.set3bit(bitmapa,current_pallete);
+         bitmap.draw();
+
+
+     Bit3BMP bit3= to3bitTab(current,current_pallete);
      std::string dir = filename.text;
 
      CompressedData data;
@@ -162,7 +173,7 @@ void Bit3Handler::handle(GuiNode *)
     Bitmap out;
     to3bitBMP(current,out,pallet);
 
-    bitmap.set3bit(out);
+    bitmap.set3bit(out, pallet);
 }
 
 Bit3DitterHandler::Bit3DitterHandler(GuiPallete &pallete, GuiBitmap &bitmap)
@@ -178,7 +189,7 @@ void Bit3DitterHandler::handle(GuiNode *)
     Pallete pallet = guipallete.getActivePallete();
     Bitmap out = current;
     dittering(out,pallet);
-    bitmap.set3bit(out);
+    bitmap.set3bit(out, pallet);
 }
 
 OriginalHandler::OriginalHandler(GuiPallete &pallete, GuiBitmap &bitmap)

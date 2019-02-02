@@ -27,21 +27,6 @@
     #include "guipallete.h"
 #endif
 
-#include <vector>
-#include <cstdio>
-
-class GuiManager
-{
-    std::vector <GuiNode *> nodes;
-public:
-    GuiNode * addNode(GuiNode *);
-    void update(GuiEvent *);
-    void draw();
-
-    GuiManager();
-    ~GuiManager();
-};
-
 using namespace std;
 
 //TODO event handlers
