@@ -10,6 +10,7 @@
 
 using namespace std;
 
+
 bool sortCompRed(SDL_Color i, SDL_Color j)
 {
     return(i.r<j.r);

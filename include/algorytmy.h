@@ -28,6 +28,7 @@ enum TYPE_OF_PALLETE
     DEFAULT,
     DEDICATED,
     GRAY_SCALE,
+    ORIGINAL,
 };
 
 struct Pallete
