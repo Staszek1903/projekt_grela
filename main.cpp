@@ -18,12 +18,27 @@
     #include "Screen.h"
     #include "algorytmy.h"
     #include "button.h"
-    #include "guimanager.h"
+ //   #include "guimanager.h"
     #include "sdlbutton.h"
     #include "textfield.h"
     #include "sdltextfield.h"
     #include "handlers.h"
 #endif
+
+#include <vector>
+#include <cstdio>
+
+class GuiManager
+{
+    std::vector <GuiNode *> nodes;
+public:
+    GuiNode * addNode(GuiNode *);
+    void update(GuiEvent *);
+    void draw();
+
+    GuiManager();
+    ~GuiManager();
+};
 
 using namespace std;
 

@@ -1,1 +1,2 @@
+button pressed: 25 300
 Exited cleanly

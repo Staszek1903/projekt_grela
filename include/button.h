@@ -5,7 +5,7 @@
 #ifdef __linux__
     #include "include/guinode.h"
 #else
-    #include "button.h"
+    #include "guinode.h"
 #endif
 
 class Button : public GuiNode

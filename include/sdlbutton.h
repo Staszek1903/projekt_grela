@@ -11,7 +11,7 @@
     #include "guidrawer.h"
     #include "guihandler.h"
     #include "Screen.h"
-    #include <SDL_ttf.h>
+    #include "SDL_ttf.h"
     #include "button.h"
 #endif
 

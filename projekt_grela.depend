@@ -914,16 +914,29 @@
 	"algorytmy.h"
 	<iostream>
 
-1547073874 source:c:\users\asus\documents\github\projekt_grela\main.cpp
+1549114732 source:c:\users\asus\documents\github\projekt_grela\main.cpp
 	<algorithm>
 	<SDL/SDL.h>
 	"include/Bitmap.h"
 	"include/Screen.h"
 	"include/algorytmy.h"
+	"include/button.h"
+	"include/guimanager.h"
+	"include/sdlbutton.h"
+	"include/textfield.h"
+	"include/sdltextfield.h"
+	"include/handlers.h"
 	<SDL.h>
 	"Bitmap.h"
 	"Screen.h"
 	"algorytmy.h"
+	"button.h"
+	"sdlbutton.h"
+	"textfield.h"
+	"sdltextfield.h"
+	"handlers.h"
+	<vector>
+	<cstdio>
 
 1547073873 c:\users\asus\documents\github\projekt_grela\sdl-1.2.14\include\sdl\sdl.h
 	"SDL_main.h"
@@ -1105,7 +1118,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1547073874 c:\users\asus\documents\github\projekt_grela\include\bitmap.h
+1548629564 c:\users\asus\documents\github\projekt_grela\include\bitmap.h
 	<SDL/SDL.h>
 	<SDL.h>
 	<string>
@@ -1290,10 +1303,10 @@
 	"begin_code.h"
 	"close_code.h"
 
-1547073874 c:\users\asus\documents\github\projekt_grela\include\screen.h
+1547328719 c:\users\asus\documents\github\projekt_grela\include\screen.h
 	"Bitmap.h"
 
-1547073874 c:\users\asus\documents\github\projekt_grela\include\algorytmy.h
+1548629564 c:\users\asus\documents\github\projekt_grela\include\algorytmy.h
 	<SDL/SDL.h>
 	<SDL.h>
 	"Screen.h"
@@ -1302,15 +1315,15 @@
 	<string>
 	<iostream>
 
-1547073874 source:c:\users\asus\documents\github\projekt_grela\src\bitmap.cpp
+1548629564 source:c:\users\asus\documents\github\projekt_grela\src\bitmap.cpp
 	"include/Bitmap.h"
 	"Bitmap.h"
 
-1547073874 source:c:\users\asus\documents\github\projekt_grela\src\compression.cpp
+1547328719 source:c:\users\asus\documents\github\projekt_grela\src\compression.cpp
 	"include/algorytmy.h"
 	"algorytmy.h"
 
-1547073874 source:c:\users\asus\documents\github\projekt_grela\src\dittering.cpp
+1548629564 source:c:\users\asus\documents\github\projekt_grela\src\dittering.cpp
 	"include/algorytmy.h"
 	"algorytmy.h"
 	<math.h>
@@ -1321,17 +1334,129 @@
 	<vector>
 	<algorithm>
 
-1547073874 source:c:\users\asus\documents\github\projekt_grela\src\screen.cpp
+1548629564 source:c:\users\asus\documents\github\projekt_grela\src\screen.cpp
 	"include/Screen.h"
+	"SDL/SDL_ttf.h"
 	"Screen.h"
+	"SDL_ttf.h"
 
 1547073874 source:c:\users\asus\documents\github\projekt_grela\src\write&read_pic.cpp
 	"include/algorytmy.h"
 	"algorytmy.h"
 	<iostream>
 
-1547153273 source:c:\users\asus\documents\github\projekt_grela\src\to3bit.cpp
+1547329080 source:c:\users\asus\documents\github\projekt_grela\src\to3bit.cpp
 	"include/algorytmy.h"
 	"algorytmy.h"
 	<math.h>
+
+1549112841 c:\users\asus\documents\github\projekt_grela\include\button.h
+	<string>
+	"include/guinode.h"
+	"guinode.h"
+
+1548629564 c:\users\asus\documents\github\projekt_grela\include\guinode.h
+	"include/guihandler.h"
+	"include/guievent.h"
+	"include/guidrawer.h"
+	"guihandler.h"
+	"guievent.h"
+	"guidrawer.h"
+
+1548629564 c:\users\asus\documents\github\projekt_grela\include\guihandler.h
+
+1548629564 c:\users\asus\documents\github\projekt_grela\include\guievent.h
+
+1548629564 c:\users\asus\documents\github\projekt_grela\include\guidrawer.h
+
+1549114681 c:\users\asus\documents\github\projekt_grela\include\guimanager.h
+	"include/guinode.h"
+	"guinode.h"
+	<vector>
+	<cstdio>
+
+1549112981 c:\users\asus\documents\github\projekt_grela\include\sdlbutton.h
+	<SDL/SDL_ttf.h>
+	"include/guidrawer.h"
+	"include/guihandler.h"
+	"include/Screen.h"
+	"include/button.h"
+	"guidrawer.h"
+	"guihandler.h"
+	"Screen.h"
+	"SDL_ttf.h"
+	"button.h"
+	<cmath>
+
+1185010204 c:\users\asus\documents\github\projekt_grela\include\sdl_ttf.h
+	"SDL.h"
+	"begin_code.h"
+	"close_code.h"
+
+1548629564 c:\users\asus\documents\github\projekt_grela\include\textfield.h
+	"include/guinode.h"
+	"guinode.h"
+	<string>
+
+1548629564 c:\users\asus\documents\github\projekt_grela\include\sdltextfield.h
+	"include/textfield.h"
+	"include/guidrawer.h"
+	"include/guihandler.h"
+	"include/Screen.h"
+	"SDL/SDL_ttf.h"
+	"textfield.h"
+	"guidrawer.h"
+	"guihandler.h"
+	"Screen.h"
+	"SDL_ttf.h"
+
+1548629564 c:\users\asus\documents\github\projekt_grela\include\handlers.h
+	"include/guihandler.h"
+	"include/guibitmap.h"
+	"include/textfield.h"
+	"include/algorytmy.h"
+	"guibitmap.h"
+	"guihandler.h"
+	"textfield.h"
+	"algorytmy.h"
+
+1548629564 c:\users\asus\documents\github\projekt_grela\include\guibitmap.h
+	"guinode.h"
+	"Screen.h"
+
+1549113043 source:c:\users\asus\documents\github\projekt_grela\src\button.cpp
+	"include/button.h"
+	"button.h"
+
+1548629564 source:c:\users\asus\documents\github\projekt_grela\src\file_io.cpp
+	"include/algorytmy.h"
+	"algorytmy.h"
+	<iostream>
+
+1548629564 source:c:\users\asus\documents\github\projekt_grela\src\guibitmap.cpp
+	"include/guibitmap.h"
+	"guibitmap.h"
+
+1548629564 source:c:\users\asus\documents\github\projekt_grela\src\guimanager.cpp
+	"include/guimanager.h"
+	"guimanager.h"
+
+1549114746 source:c:\users\asus\documents\github\projekt_grela\src\guinode.cpp
+	"guinode.h"
+
+1548629564 source:c:\users\asus\documents\github\projekt_grela\src\handlers.cpp
+	"include/handlers.h"
+	"handlers.h"
+
+1548629564 source:c:\users\asus\documents\github\projekt_grela\src\sdlbutton.cpp
+	"include/sdlbutton.h"
+	"sdlbutton.h"
+
+1548629564 source:c:\users\asus\documents\github\projekt_grela\src\sdltextfield.cpp
+	"include/sdltextfield.h"
+	"sdltextfield.h"
+
+1548629564 source:c:\users\asus\documents\github\projekt_grela\src\textfield.cpp
+	"include/textfield.h"
+	"textfield.h"
 
