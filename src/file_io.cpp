@@ -123,27 +123,25 @@ bool read_from_okon(std::string dir, CompressedData &data)
     binaryRead(file, height);
     binaryRead(file, pallete_type);
 
+    printf("pallete type: %i" , pallete_type);
+
     switch(pallete_type)
     {
         case DEDICATED:
-            //printf("<<<<<<<<<DEDYKOWANA\n");
+            printf("<<<<<<<<<DEDYKOWANA\n");
             for(int i=0 ;i<8; ++i)
                 binaryRead(file, pallete.c[i]);
         break;
 
         case DEFAULT:
-            //printf("<<<<<<<<<nazucona\n");
+            printf("<<<<<<<<<nazucona\n");
             pallete = NarzuconaPaleta();
         break;
 
         case GRAY_SCALE:
-            //printf("<<<<<<<<<SKALA SZAROSCI\n");
+            printf("<<<<<<<<<SKALA SZAROSCI\n");
             pallete = SkalaSzarosci();
         break;
-
-    }
-    if(pallete_type == DEDICATED)
-    {
 
     }
 

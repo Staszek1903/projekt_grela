@@ -53,6 +53,13 @@ Pallete GuiPallete::getActivePallete()
     return palety[active];
 }
 
+TYPE_OF_PALLETE GuiPallete::getActivePalleteType()
+{
+    TYPE_OF_PALLETE type[4] = {DEFAULT,GRAY_SCALE,DEDICATED,DEDICATED};
+
+    return type[active];
+}
+
 void GuiPallete::update(GuiEvent *)
 {
 

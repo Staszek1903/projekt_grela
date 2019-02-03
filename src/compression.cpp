@@ -147,6 +147,7 @@ void compression( CompressedData& out, Bit3BMP& obraz)
     out.original_width = obraz.width;
     out.original_height = obraz.height;
     out.palete = obraz.paleta;
+    out.palete_type = obraz.palete_type;
 
     out.dataResize(4);
 

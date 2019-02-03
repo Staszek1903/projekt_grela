@@ -18,6 +18,7 @@ public:
     int getActive();
     void setActive(int active);
     Pallete getActivePallete();
+    TYPE_OF_PALLETE getActivePalleteType();
 
     virtual void update(GuiEvent *) override;
     virtual void draw() override;

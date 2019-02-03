@@ -21,13 +21,14 @@ Bitmap &GuiBitmap::setOiginal(const Bitmap &bmp)
     return bitmaps.at(0);
 }
 
-Bitmap &GuiBitmap::set3bit(const Bitmap &bmp, Pallete pallete)
+Bitmap &GuiBitmap::set3bit(const Bitmap &bmp, Pallete pallete, TYPE_OF_PALLETE p)
 {
     bitmaps.at(1) = bmp;
     active = 1;
     draw();
 
     bit3pallete = pallete;
+    pallete_type = p;
 
     return bitmaps.at(1);
 }
@@ -50,6 +51,11 @@ Bitmap &GuiBitmap::getActive()
 Pallete GuiBitmap::getPallete()
 {
     return bit3pallete;
+}
+
+TYPE_OF_PALLETE GuiBitmap::getPalleteType()
+{
+    return pallete_type;
 }
 
 void GuiBitmap::setActive(int a)
